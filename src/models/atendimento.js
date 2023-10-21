@@ -24,5 +24,15 @@ const Atendimento = conexao.define('Atendimentos', {
     updatedAt: false
 })
 
+Atendimentos.belongsTo(Cachorros, {
+    constraint: true,
+    foreignKey: 'idAtendimentos'
+})
+
+Cachorros.hasMany(Atendimentos, {
+    constraint: true,
+    foreignKey: 'idAtendimento'
+})
+
 module.exports = Atendimento
 

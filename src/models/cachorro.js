@@ -16,5 +16,15 @@ const Cachorro = conexao.define('Cachorros', {
     updatedAt: false
 })
 
+Cachorros.belongsTo(Cliente, {
+    constraint: true,
+    foreignKey: 'idClientes'
+})
+
+Cliente.hasMany(Cachorros, {
+    constraint: true,
+    foreignKey: 'idClientes'
+})
+
 module.exports = Cachorro
 

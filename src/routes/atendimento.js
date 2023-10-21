@@ -2,6 +2,7 @@ const express = require('express')
 const ControllerAtendimento = require('../controllers/atendimento.js')
 const authMiddleware = require('../middleware/auth.js')
 
+
 const controller = new ControllerAtendimento()
 const RouterAtendimentos = express.Router()
 

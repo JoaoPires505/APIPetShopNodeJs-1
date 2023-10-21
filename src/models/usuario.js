@@ -29,5 +29,11 @@ const Usuario = conexao.define('usuarios', {
     updatedAt: false
 })
 
+Clientes.belongsTo(Usuarios, { 
+    constraint: true, 
+    foreignKey: 'idUsuarios'
+})
+
+
 module.exports = Usuario
 

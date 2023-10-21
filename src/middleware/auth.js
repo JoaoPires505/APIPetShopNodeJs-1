@@ -21,4 +21,15 @@ function authMiddleware(req, res, next) {
     });
 };
 
+function checarpermissao(permisssao) {
+    return (req, res, next) => {
+      if (req.usuario && req.usuario.permissao === permissao) {
+        next();
+      } else {
+        res.status(403).json({ message: 'Acesso negado' });
+      }
+    };
+  }
+
 module.exports = authMiddleware;
+module.exports = checarpermissao;
