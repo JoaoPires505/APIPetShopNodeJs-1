@@ -1,14 +1,14 @@
 const express = require('express')
-const ControllerExercicio = require('../controllers/atendimento.js')
+const ControllerExercicio = require('../controllers/cachorro.js')
 const authMiddleware = require('../middleware/auth.js')
 
 const controller = new ControllerExercicio()
-const RouterAtendimentos = express.Router()
+const RouterCachorros = express.Router()
 
-RouterAtendimentos.get('/petlife/atendimento/:id', authMiddleware, controller.PegarUm)
-RouterAtendimentos.get('/petlife/atendimento/', authMiddleware, controller.PegarTodos)
-RouterAtendimentos.post('/petlife/atendimento', authMiddleware, controller.Add)
-RouterAtendimentos.put('/petlife/atendimento/:id', authMiddleware, controller.Update)
-RouterAtendimentos.delete('/petlife/atendimento/:id', authMiddleware, controller.Delete)
+RouterAtendimentos.get('/petlife/cachorro/:id', authMiddleware, controller.PegarUm)
+RouterAtendimentos.get('/petlife/cachorro/', authMiddleware, controller.PegarTodos)
+RouterAtendimentos.post('/petlife/cachorro', authMiddleware, controller.Add)
+RouterAtendimentos.put('/petlife/cachorro/:id', authMiddleware, controller.Update)
+RouterAtendimentos.delete('/petlife/cachorro/:id', authMiddleware, controller.Delete)
 
-module.exports = RouterAtendimentos
+module.exports = RouterCachorros
