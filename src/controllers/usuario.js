@@ -1,15 +1,34 @@
-const ServicoCliente = require("../services/cliente.js")
+const ServicoUsuario = require("../services/usuario.js")
 
-const servico = new ServicoCliente()
+const servico = new ServicoUsuario()
 
-class ControllerCliente {
+class ControllerUsuario {
 
+    async Login(req, res) {
+        const { email, senha } = req.body;
+
+        const { dataValues: pessoa } = await servico. PegarUmPorEmail(email);
+        if (!pessoa) {
+        return res.status (401).json({ mensagem: 'Credenciais inválidas' });
+        }
+        console.log(pessoa.senha, senha)
+        if (!(await bcrypt.compare(senha, pessoa.senha))) {
+        return res.status (401).json({ mensagem: 'Credenciais inválidas' });
+        }
+        const token = jwt.sign(
+        { id: pessoa.id, nome: pessoa.nome, email: pessoa.email }, 
+        config.secret
+        )
+        res.json({ mensagem: "Login bem-sucedido", token });
+    }
+        
+    
     async PegarUm(req, res){
         try {
             console.log(req.params.id)
             const result = await servico.PegarUm(req.params.id)
             res.status(200).json({
-                cliente: result
+                usuario: result
             })
         } catch (error) {
             console.log(error)
@@ -21,7 +40,7 @@ class ControllerCliente {
         try {
             const result = await servico.PegarTodos()
             res.status(200).json({
-                clientes: result
+                usuarios: result
             })
         } catch (error) {
             console.log(error)
@@ -31,9 +50,9 @@ class ControllerCliente {
 
     async Add(req, res){
         try {
-            const result = await servico.Add(req.body.cliente)
+            const result = await servico.Add(req.body.usuario)
             res.status(201).json({
-                cliente: result
+                usuario: result
             })
         } catch (error) {
             console.log(error)
@@ -43,9 +62,9 @@ class ControllerCliente {
 
     async Update(req, res){
         try {
-            const result = await servico.Update(req.params.id, req.body.cliente)
+            const result = await servico.Update(req.params.id, req.body.usuario)
             res.status(200).json({
-                cliente: result
+                usuario: result
             })
         } catch (error) {
             console.log(error)
@@ -65,4 +84,4 @@ class ControllerCliente {
 
 }
 
-module.exports = ControllerCliente
+module.exports = ControllerUsuario

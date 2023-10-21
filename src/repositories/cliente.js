@@ -1,28 +1,42 @@
-const Cliente = require("../models/cliente.js");
+const cliente = require('../models/cliente.js')
 
-class RepositoriesClientes {
-  async PegarClientePorId(id, transaction) {
-    return Cliente.findOne({
-      where: { id },
-      transaction,
-    });
-  }
-  async PegarTodosOsClientes() {
-    return Cliente.findAll({});
-  }
-  async CriarCliente(cliente, transaction) {
-    return Cliente.create(cliente, { transaction });
-  }
+class RepositorieClientes {
 
-  async AtualizarCliente(id, cliente) {
-    return Cliente.update(cliente, {
-      where: { id },
-    });
-  }
-    async DeletarCliente(id) {
-        return Cliente.destroy({
-        where: { id },
+    async PegarUm(id, transaction) {
+        return cliente.findOne({
+            where: { id },
+            transaction
         });
     }
+    
+    async PegarTodos() {
+        return cliente.findAll();
+    }
+
+    async Add(cliente, transaction) {
+        const result = await cliente.create(cliente, { transaction })
+
+        return result
+    }
+
+    async Update(id, cliente) {
+        const result = await Cliente.update(cliente, {
+            where: {
+                id
+            }
+        })
+
+        console.log(result)
+
+        return result
+    }
+
+    async Delete(id) {
+        return cliente.destroy({
+            where: { id }
+        });
+    }
+
 }
-module.exports = new RepositoriesClientes();
+
+module.exports = RepositorieClientes

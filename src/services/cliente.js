@@ -1,42 +1,48 @@
-const RepositoriesClientes = require("../repositories/cliente.js");
+const RepositorieClientes = require("../repositories/cliente.js");
 
+const repositorio = new RepositorieClientes()
 
-const repositorio = new RepositoriesClientes()
-
-class ServicesClientes {
-
-    VerficarClientes(cliente) {
+class ServicoClientes {
+    
+    VerficarCliente(cliente) {
         if(!cliente){
-            throw new Error("Não foi enviado nenhum Cliente para ser adicionado")
-        }else if(!cliente.nome){
-            throw new Error("O nome do cliente não foi enviado")
-        }else if(!cliente.telefone){
-            throw new Error("O telefone do cliente não foi enviado")
-        }
+            throw new Error('Não foi enviada a cliente para adicionar');
+        } else if(!cliente.nome){
+            throw new Error('Não foi enviado o nome da cliente');
+        } else if(!cliente.telefone){
+            throw new Error('Não foi enviado o telefone da cliente');
+        } 
+
         return true
     }
 
-    async PegarClientePorId(id, transaction) {
-        return repositorio.PegarClientePorId(id, transaction)
+    async PegarUm(id, transaction) {
+        return repositorio.PegarUm(id, transaction);
     }
 
-    async PegarTodosOsClientes() {
-        return repositorio.PegarTodosOsClientes()
+    async PegarTodos() {
+        return repositorio.PegarTodos();
     }
 
-    async CriarCliente(cliente, transaction) {
-        this.VerficarClientes(cliente)
-        return repositorio.CriarCliente(cliente, transaction)
+    async Add(cliente, transaction) {
+        this.VerficarCliente(cliente)
+
+        return repositorio.Add(cliente, transaction);
     }
 
-    async AtualizarCliente(id, cliente) {
-        this.VerficarClientes(cliente)
-        return repositorio.AtualizarCliente(id, cliente)
+    async Update(id, cliente) {
+        if(!id) {
+            throw new Error('Não foi enviada o identificador da cliente para alterar');
+        } 
+        this.VerficarCliente(cliente)
+
+        return repositorio.Update(id, cliente);
     }
 
-    async DeletarCliente(id) {
-        return repositorio.DeletarCliente(id)
+    async Delete(id) {
+        return repositorio.Delete(id);
     }
-}
 
-module.exports = new ServicesClientes();
+} 
+
+module.exports = ServicoClientes

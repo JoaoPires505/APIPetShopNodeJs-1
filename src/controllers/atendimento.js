@@ -1,15 +1,15 @@
-const ServicoCliente = require("../services/cliente.js")
+const ServicoAtendimento = require("../services/atendimento.js")
 
-const servico = new ServicoCliente()
+const servico = new ServicoAtendimento()
 
-class ControllerCliente {
+class ControllerAtendimento {
 
     async PegarUm(req, res){
         try {
             console.log(req.params.id)
             const result = await servico.PegarUm(req.params.id)
             res.status(200).json({
-                cliente: result
+                atendimento: result
             })
         } catch (error) {
             console.log(error)
@@ -21,7 +21,7 @@ class ControllerCliente {
         try {
             const result = await servico.PegarTodos()
             res.status(200).json({
-                clientes: result
+                atendimentos: result
             })
         } catch (error) {
             console.log(error)
@@ -31,9 +31,9 @@ class ControllerCliente {
 
     async Add(req, res){
         try {
-            const result = await servico.Add(req.body.cliente)
+            const result = await servico.Add(req.body.atendimento)
             res.status(201).json({
-                cliente: result
+                atendimento: result
             })
         } catch (error) {
             console.log(error)
@@ -43,9 +43,9 @@ class ControllerCliente {
 
     async Update(req, res){
         try {
-            const result = await servico.Update(req.params.id, req.body.cliente)
+            const result = await servico.Update(req.params.id, req.body.atendimento)
             res.status(200).json({
-                cliente: result
+                atendimento: result
             })
         } catch (error) {
             console.log(error)
@@ -65,4 +65,4 @@ class ControllerCliente {
 
 }
 
-module.exports = ControllerCliente
+module.exports = ControllerAtendimento
