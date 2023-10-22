@@ -20,6 +20,10 @@ class ControllerUsuario {
         config.secret
         )
         res.json({ mensagem: "Login bem-sucedido", token });
+        
+        if(usuario == admin){
+            console.log("Você pode cadastrar funcionários")
+        }
     }
         
     
