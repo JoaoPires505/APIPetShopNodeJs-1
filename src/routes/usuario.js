@@ -12,4 +12,6 @@ RouterUsuarios.post('/petlife/usuario', authMiddleware, controller.Add)
 RouterUsuarios.put('/petlife/usuario/:id', authMiddleware, controller.Update)
 RouterUsuarios.delete('/petlife/usuario/:id', authMiddleware, controller.Delete)
 
+
+
 module.exports = RouterUsuarios
